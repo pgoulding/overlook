@@ -6,6 +6,11 @@ import $ from 'jquery';
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
+import Tabs from '../src/Tabs';
+import Main from '../src/Main';
+import Customer from '../src/Customer';
+import Orders from '../src/Orders';
+import Rooms from '../src/Rooms';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
