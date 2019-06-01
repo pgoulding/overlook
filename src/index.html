@@ -4,10 +4,35 @@
     <title>Webpack Starter Kit</title>
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
+    <h1>Overlook</h1>
+    <div class="container">
+      <ul class="tabs">
+        <li class="tab-link current" data-tab="tab__main">Main</li>
+        <li class="tab-link" data-tab="tab__orders" >Orders</li>
+        <li class="tab-link" data-tab="tab__rooms">Rooms</li>
+        <li class="tab-link" data-tab="tab__customers">Customers</li>
+      </ul>
+      <div id="tab__main" class="tab-content current">
+        <p id="main__rooms-available"></p>
+        <p id="main__todays-income"></p>
+        <p id="main__todays-service-charges"></p>
+        <p id="main__occupation-rate"></p>
+      </div>
+      <div id="tab__orders" class="tab-content">
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </div>
+      <div id="tab__rooms" class="tab-content">
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+        aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      </div>
+      <div id="tab__customers" class="tab-content">
+        <input id="tab__customers-search" type="search" placeholder="Search Customers"><input>
+        <textarea id="tab__customers-output">
+          <ul></ul>
+        </textarea>
+      </div>
 
-    <img src="/images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+    </div>
   </body>
 </html>
