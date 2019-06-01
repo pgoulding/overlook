@@ -12,12 +12,12 @@ class Main {
   }
 
   roomsAvail() {
-    let rooms = ([...this.roomData].length - this.bookingsData.filter(room => this.date === room.date).length)
+    let rooms = this.roomData.length - this.bookingsData.filter(room => this.date === room.date).length
     if (rooms) {
       domUpdates.availableRoomsNum(rooms)
       return rooms;
     } else {
-      domUpdates.availableRoomsNum('an error has occured, please contact you web administrator.')
+      domUpdates.availableRoomsNum(0)
       return 'an error has occured, please contact you web administrator.'
     }
   }
@@ -26,17 +26,17 @@ class Main {
     let services = this.servicesMoney()
     let bookings = this.bookingsMoney()
     let total = Math.floor(bookings += services);
-    if (isNaN(services) === true && isNaN(bookings) === false) {
-      domUpdates.todaysDebt(bookings)
-      return bookings
-    } else if (isNaN(bookings) === true && isNaN(services) === false) {
-      domUpdates.todaysDebt(services)
-      return services
-    } else if (isNaN(total) === false) {
+    if (typeof total === Number) {
       domUpdates.todaysDebt(total)
       return total
+    } else if (typeof bookings === Number) {
+      domUpdates.todaysDebt(bookings)
+      return bookings
+    } else if (typeof services === Number) {
+      domUpdates.todaysDebt(services)
+      return services
     } else {
-      domUpdates.todaysDebt('an error has occured, please contact you web administrator.')
+      domUpdates.todaysDebt(0)
       return 'an error has occured, please contact you web administrator.'
     }
 
@@ -48,11 +48,11 @@ class Main {
       acc += service.totalCost
       return acc
     }, 0)
-    if (todaysInvoices.length !== 0) {
+    if (typeof money === Number) {
       domUpdates.todaysServiceCharges(money)
       return money
     } else {
-      domUpdates.todaysServiceCharges('Nothing Today')
+      domUpdates.todaysServiceCharges(0)
       return 'Nothing Today'
     }
   }
@@ -70,7 +70,7 @@ class Main {
       acc += booking.roomCost
       return acc
     }, 0);
-    if (money) {
+    if (typeof money === Number) {
       return money
     } else {
       return 'Nothing Today'
@@ -79,6 +79,7 @@ class Main {
 
   occupationPercentage() {
     let percent = Math.floor((this.roomsAvailable / this.roomData.length) * 100);
+    domUpdates.occupation(percent)
     return percent;
   }
 
