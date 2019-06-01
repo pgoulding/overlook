@@ -6,12 +6,12 @@ class Main {
     this.servicesData = service;
     this.roomData = rooms;
     this.date = date;
-    this.roomsAvailable = this.roomsAva()
+    this.roomsAvailable = this.roomsAvail()
     this.debts = this.debtsToday()
     this.occupationRate = this.occupationPercentage()
   }
 
-  roomsAva() {
+  roomsAvail() {
     let rooms = ([...this.roomData].length - this.bookingsData.filter(room => this.date === room.date).length)
     if (rooms) {
       domUpdates.availableRoomsNum(rooms)
