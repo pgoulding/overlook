@@ -1,17 +1,16 @@
-import Orders from '../src/Orders'
-import Tabs from '../src/Tabs'
-import chai from 'chai';
-import spies from 'chai-spies'
-import domUpdates from '../src/domUpdates'
+// // import Orders from '../src/Orders'
+// import chai from 'chai';
+// import spies from 'chai-spies'
+// import domUpdates from '../src/domUpdates'
 
-const expect = chai.expect;
-chai.use(spies)
-// chai.spy.on(domUpdates, 'endGame', () => true)
+// const expect = chai.expect;
+// chai.use(spies)
+// // chai.spy.on(domUpdates, 'endGame', () => true)
 
-describe('Orders', function () {
+// describe('Orders', function () {
 
-  it('should be a function', function () {
-    expect(Orders).to.be.a('function');
-  });
+//   it('should be a function', function () {
+//     expect(Orders).to.be.a('function');
+//   });
 
-});
+// });

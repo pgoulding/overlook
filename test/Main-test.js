@@ -8,6 +8,7 @@ chai.use(spies)
 chai.spy.on(domUpdates, 'availableRoomsNum', () => true)
 chai.spy.on(domUpdates, 'todaysDebt', () => true)
 chai.spy.on(domUpdates, 'todaysServiceCharges', () => true)
+chai.spy.on(domUpdates, 'occupation', () => true)
 
 
 describe('Main', function () {
@@ -15,7 +16,7 @@ describe('Main', function () {
   let main;
 
   beforeEach(function () {
-    main = new Main(bookings, roomServices, rooms, '21/10/2019')
+    main = new Main(bookings, roomServices, rooms, '21/08/2019')
   })
 
   it('should be a function', function () {
@@ -27,25 +28,25 @@ describe('Main', function () {
   })
 
   it('should show how many rooms are still available on a specific date', function () {
-    expect(rooms.length).to.equal(22)
-    expect(main.roomsAvailable).to.equal(21)
+    expect(rooms.length).to.equal(20)
+    expect(main.roomsAvailable).to.equal(17)
   })
 
   it('should show how the debts owed/earned for services for todays date', function () {
-    expect(main.servicesMoney()).to.equal(17.05)
+    expect(main.servicesMoney()).to.eql('34.94')
   })
 
   it('should show how the debts owed/earned for bookings for todays date', function () {
-    expect(main.bookingsMoney()).to.equal(258.1)
+    expect(main.bookingsMoney()).to.equal(774.92)
   })
 
   it('should show how the total debts owed/earned for todays date', function () {
-    expect(main.debtsToday()).to.equal(275)
+    expect(main.debtsToday()).to.eql('34.94')
   })
 
   it('should show the current occupation rate', function () {
     expect(main.occupationRate).to.be.a('number')
-    expect(main.occupationRate).to.be.equal(95)
+    expect(main.occupationRate).to.be.equal(85)
   })
 
   it('should have error handling on all methods', function () {
@@ -56,10 +57,10 @@ describe('Main', function () {
   })
   
   it('should return just the room service total if no rooms are booked', function () {
-    let main3 = new Main(bookings, roomServices, rooms, '24/12/2019')
-    expect(main3.debts).to.equal(24.24)
+    let main3 = new Main(bookings, roomServices, rooms, '21/08/2019')
+    expect(main3.debts).to.equal('34.94')
   })
 
-  
+
 
 });
