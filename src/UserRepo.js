@@ -6,11 +6,7 @@ class UserRepo {
   }
   showUsers(input) {
     let filteredUsers = this.data.filter(user => user.name.toLowerCase().includes(input.toLowerCase()))
-    if (filteredUsers.length === 1) {
-      let foundUser = this.data.find(user => user.id === filteredUsers[0].id)
-      domUpdates.foundUser(foundUser)
-      return foundUser
-    } else if (filteredUsers.length > 1) {
+    if (filteredUsers.length > 0) {
       domUpdates.showUsers(filteredUsers)
       return filteredUsers;
     } else {

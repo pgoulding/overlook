@@ -29,7 +29,7 @@ describe('UserRepo', function () {
   })
 
   it('should return the user obj, if it\'s the only one matching (case insenstitve)', function () {
-    expect(userRepo.showUsers('anya upT')).to.eql({ id: 3, name: 'Anya Upton' })
+    expect(userRepo.showUsers('anya upT')).to.eql([{ id: 3, name: 'Anya Upton' }])
   })
 
 
