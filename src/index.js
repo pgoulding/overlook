@@ -58,10 +58,12 @@ import RoomRepo from '../src/RoomRepo'
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 import domUpdates from './domUpdates';
+import RoomServiceRepo from './RoomServiceRepo';
 
 let userRepo;
 let main; 
-let roomRepo
+let orderRepo;
+// let roomRepo
 $(document).ready(function () {
   
   console.log(todaysDate())
@@ -76,8 +78,9 @@ $(document).ready(function () {
   })
   
   setTimeout(() => {
-    main = new Main(data.bookings, data.services, data.rooms, '21/08/2019')
+    main = new Main(data.bookings, data.services, data.rooms, '15/07/2019')
     userRepo = new UserRepo(data.users)
+    orderRepo = new RoomServiceRepo(data.services, '15/07/2019')
   }, 3000);
 
   // const allUsers = new UserRepo(data.users)
