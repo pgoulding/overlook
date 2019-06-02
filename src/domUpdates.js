@@ -16,8 +16,7 @@ const domUpdates = {
   },
 
   searchCustomers(users) {
-    // $('#tab__customers-output').html(`<ul id="tab__customers-output">
-    // </ul>`)
+
     $('#no-users').text('')
     $('#tab__customers-output').text('')
     users.forEach(user => {
@@ -31,13 +30,19 @@ const domUpdates = {
   },
 
   allRoomServiceOnDate(services) {
-    console.log(services)
     services.forEach(service => {
       $('#orders__todays-room-service').append(`<tr>
         <td>${service.food}</td><td>$${service.totalCost}</td>
         </tr>`)
     })
-    
+  },
+
+  showLeastBooked(date) {
+    $('#rooms__least-booked').html(`<h3>The Most Booked Date is ${date}</h3>`)
+  },
+
+  showMostBooked(date) {
+    $('#rooms__most-booked').html(`<h3>The date with the most rooms open is ${date}</h3>`)
   }
 }
 
