@@ -12,11 +12,21 @@ const domUpdates = {
   },
 
   occupation(percent) {
-    $('#main__occupation-rate').html(`<h3>We have %${percent} unoccupied today`)
+    $('#main__occupation-rate').html(`<h3>We are %${percent} unoccupied today`)
   },
 
-  searchCustomers(input) {
-    $('#tab__customers-output ul').html(`<h3>`)
+  searchCustomers(users) {
+    // $('#tab__customers-output').html(`<ul id="tab__customers-output">
+    // </ul>`)
+    $('#no-users').text('')
+    $('#tab__customers-output').text('')
+    users.forEach(user => {
+      $('#tab__customers-output').append(`<li data="${user.id}">${user.name}</li>`)
+    })
+  },
+  promptNewUser() {
+    $('#no-users').text('No Users Found')
+    $('#tab__customers-output').text('No Users Found')
   }
 }
 

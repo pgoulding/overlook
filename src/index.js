@@ -47,7 +47,8 @@ import $ from 'jquery';
 import './css/base.scss';
 
 import Main from '../src/Main';
-// import UserRepo
+import UserRepo from '../src/UserRepo'
+import RoomRepo from '../src/RoomRepo'
 // import Customer from '../src/Customer';
 // import RoomService from '../src/RoomService';
 // import Room from '../src/Room';
@@ -56,8 +57,11 @@ import Main from '../src/Main';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
+import domUpdates from './domUpdates';
 
-
+let userRepo;
+let main; 
+let roomRepo
 $(document).ready(function () {
   
   console.log(todaysDate())
@@ -72,7 +76,8 @@ $(document).ready(function () {
   })
   
   setTimeout(() => {
-    const main = new Main(data.bookings, data.services, data.rooms, '21/08/2019')
+    main = new Main(data.bookings, data.services, data.rooms, '21/08/2019')
+    userRepo = new UserRepo(data.users)
   }, 3000);
 
   // const allUsers = new UserRepo(data.users)
@@ -81,8 +86,13 @@ $(document).ready(function () {
   // const allServices = new RoomServiceRepo(data.roomservice)
 })
 $('#tab__customers-search').on('input', function () {
-  let typed = $('tab__customers-search').val()
-  
+  let typed = $('#tab__customers-search').val()
+  if (typed.length > 1) {
+    userRepo.showUsers(typed)
+  } else {
+    domUpdates.promptNewUser()
+  }
+    
 })
 // $('#btn_customer-select').on('click', function () {
 //   let user = $('input__user-select').val()
