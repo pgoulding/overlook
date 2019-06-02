@@ -95,15 +95,19 @@ $('#tab__customers-search').on('input', function () {
   let typed = $('#tab__customers-search').val()
   if (typed.length > 1) {
     userRepo.showUsers(typed)
+    $('.tab__customers-output li').on('click', function () {
+      let customerID = $(this).attr('data-id')
+      // showCustomerData(customerID)
+      console.log(customerID)
+    })
   } else {
     domUpdates.promptNewUser()
   }
-    
 })
-// $('#btn_customer-select').on('click', function () {
-//   let user = $('input__user-select').val()
+
+// const showCustomerData = user => {
 //   const customer = new Customer(usersData, user)
 //   const room = new Room(roomsData, user)
 //   const roomService = new RoomService(roomServicesData, user)
 //   const booking = new Booking(bookingsData, user)
-// })
+// }

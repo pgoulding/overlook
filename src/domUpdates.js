@@ -18,15 +18,15 @@ const domUpdates = {
   searchCustomers(users) {
 
     $('#no-users').text('')
-    $('#tab__customers-output').text('')
+    $('.tab__customers-output').text('')
     users.forEach(user => {
-      $('#tab__customers-output').append(`<li data="${user.id}">${user.name}</li>`)
+      $('.tab__customers-output').append(`<li class="customer__search-data" data-id="${user.id}">${user.name}</li>`)
     })
   },
 
   promptNewUser() {
     $('#no-users').text('No Users Found')
-    $('#tab__customers-output').text('No Users Found')
+    $('.tab__customers-output').text('No Users Found')
   },
 
   allRoomServiceOnDate(services) {
