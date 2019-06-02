@@ -5,6 +5,8 @@ import domUpdates from '../src/domUpdates'
 import { bookings } from '../data'
 const expect = chai.expect;
 chai.use(spies)
+chai.spy.on(domUpdates, 'showMostBooked', () => true)
+chai.spy.on(domUpdates, 'showLeastBooked', () => true)
 
 describe('Booking Repo', function () {
   
@@ -26,9 +28,17 @@ describe('Booking Repo', function () {
     expect(bookingRepo.data).to.be.equal(bookings)
   })
 
+  it('should count how many rooms are booked per date', function () {
+    expect(bookingRepo.bookingDateCount()).to.be.an('array')
+    expect(bookingRepo.bookingDateCount()).to.have.length(8)
+  })
+
   it('should find the most booked date', function () {
-    bookingRepo.mostBookedDate()
-    console.log(bookingRepo.mostBookedDate())
+    expect(bookingRepo.mostBookedDate()).to.equal('25/08/2019')
+  })
+
+  it('should find the least popular date', function () {
+    expect(bookingRepo.leastBookedDate()).to.equal('28/09/2019')
   })
 
 })
