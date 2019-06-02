@@ -5,9 +5,10 @@ class UserRepo {
     this.data = data;
   }
   showUsers(input) {
-    let filteredUsers = this.data.filter(user => user.name.toLowerCase().includes(input.toLowerCase()))
+    let lowerCase = input.toLowerCase()
+    let filteredUsers = this.data.filter(user => user.name.toLowerCase().includes(lowerCase))
     if (filteredUsers.length > 0) {
-      domUpdates.showUsers(filteredUsers)
+      domUpdates.searchCustomers(filteredUsers)
       return filteredUsers;
     } else {
       domUpdates.promptNewUser();

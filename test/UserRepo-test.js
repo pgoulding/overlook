@@ -5,9 +5,9 @@ import domUpdates from '../src/domUpdates'
 import { users } from '../data'
 const expect = chai.expect;
 chai.use(spies)
-chai.spy.on(domUpdates, 'showUsers', () => true)
+chai.spy.on(domUpdates, 'searchCustomers', () => true)
 chai.spy.on(domUpdates, 'promptNewUser', () => true)
-chai.spy.on(domUpdates, 'foundUser', () => true)
+
 
 describe('UserRepo', function () {
 
