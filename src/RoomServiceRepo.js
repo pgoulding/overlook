@@ -8,10 +8,8 @@ class RoomServiceRepo {
   }
 
   totalServicesDate(date) {
-    console.log('what up')
     let todaysServices = this.data.filter(day => day.date === date)
     domUpdates.allRoomServiceOnDate(todaysServices)
-    console.log(todaysServices)
     return todaysServices
   }
 
