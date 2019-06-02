@@ -1,26 +1,26 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
+/* eslint-disable max-len */
+
 const data = {};
 
 fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users')
-.then(response => response.json())
-.then(remote => data.users = remote.users)
-.catch(err => console.error(err))
+  .then(response => response.json())
+  .then(remote => data.users = remote.users)
+  .catch(err => console.error(err))
 
 fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/rooms/rooms')
-.then(response => response.json())
-.then(remote => data.rooms = remote.rooms)
-.catch(err => console.error(err))
+  .then(response => response.json())
+  .then(remote => data.rooms = remote.rooms)
+  .catch(err => console.error(err))
 
 fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/bookings/bookings')
-.then(response => response.json())
-.then(remote => data.bookings = remote.bookings)
-.catch(err => console.error(err))
+  .then(response => response.json())
+  .then(remote => data.bookings = remote.bookings)
+  .catch(err => console.error(err))
 
 fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServices')
-.then(response => response.json())
-.then(remote => data.services = remote.roomServices)
-.catch(err => console.error(err))
+  .then(response => response.json())
+  .then(remote => data.services = remote.roomServices)
+  .catch(err => console.error(err))
 
 const todaysDate = () => {
   let today = new Date();
@@ -47,7 +47,8 @@ import $ from 'jquery';
 import './css/base.scss';
 
 import Main from '../src/Main';
-// import UserRepo
+import UserRepo from '../src/UserRepo'
+import RoomRepo from '../src/RoomRepo'
 // import Customer from '../src/Customer';
 // import RoomService from '../src/RoomService';
 // import Room from '../src/Room';
@@ -56,8 +57,15 @@ import Main from '../src/Main';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
+import domUpdates from './domUpdates';
+import RoomServiceRepo from './RoomServiceRepo';
+import BookingRepo from './BookingsRepo';
 
-
+let userRepo;
+let main; 
+let orderRepo;
+let bookingRepo;
+// let roomRepo;
 $(document).ready(function () {
   
   console.log(todaysDate())
@@ -72,7 +80,10 @@ $(document).ready(function () {
   })
   
   setTimeout(() => {
-    const main = new Main(data.bookings, data.services, data.rooms, '21/08/2019')
+    main = new Main(data.bookings, data.services, data.rooms, '15/07/2019')
+    userRepo = new UserRepo(data.users)
+    orderRepo = new RoomServiceRepo(data.services, '15/07/2019')
+    bookingRepo = new BookingRepo(data.bookings)
   }, 3000);
 
   // const allUsers = new UserRepo(data.users)
@@ -81,13 +92,22 @@ $(document).ready(function () {
   // const allServices = new RoomServiceRepo(data.roomservice)
 })
 $('#tab__customers-search').on('input', function () {
-  let typed = $('tab__customers-search').val()
-  
+  let typed = $('#tab__customers-search').val()
+  if (typed.length > 1) {
+    userRepo.showUsers(typed)
+    $('.tab__customers-output li').on('click', function () {
+      let customerID = $(this).attr('data-id')
+      // showCustomerData(customerID)
+      console.log(customerID)
+    })
+  } else {
+    domUpdates.promptNewUser()
+  }
 })
-// $('#btn_customer-select').on('click', function () {
-//   let user = $('input__user-select').val()
+
+// const showCustomerData = user => {
 //   const customer = new Customer(usersData, user)
 //   const room = new Room(roomsData, user)
 //   const roomService = new RoomService(roomServicesData, user)
 //   const booking = new Booking(bookingsData, user)
-// })
+// }

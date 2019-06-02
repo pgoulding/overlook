@@ -5,9 +5,9 @@ import domUpdates from '../src/domUpdates'
 import { users } from '../data'
 const expect = chai.expect;
 chai.use(spies)
-chai.spy.on(domUpdates, 'showUsers', () => true)
+chai.spy.on(domUpdates, 'searchCustomers', () => true)
 chai.spy.on(domUpdates, 'promptNewUser', () => true)
-chai.spy.on(domUpdates, 'foundUser', () => true)
+
 
 describe('UserRepo', function () {
 
@@ -29,7 +29,7 @@ describe('UserRepo', function () {
   })
 
   it('should return the user obj, if it\'s the only one matching (case insenstitve)', function () {
-    expect(userRepo.showUsers('anya upT')).to.eql({ id: 3, name: 'Anya Upton' })
+    expect(userRepo.showUsers('anya upT')).to.eql([{ id: 3, name: 'Anya Upton' }])
   })
 
 

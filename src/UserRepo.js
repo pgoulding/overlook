@@ -5,13 +5,10 @@ class UserRepo {
     this.data = data;
   }
   showUsers(input) {
-    let filteredUsers = this.data.filter(user => user.name.toLowerCase().includes(input.toLowerCase()))
-    if (filteredUsers.length === 1) {
-      let foundUser = this.data.find(user => user.id === filteredUsers[0].id)
-      domUpdates.foundUser(foundUser)
-      return foundUser
-    } else if (filteredUsers.length > 1) {
-      domUpdates.showUsers(filteredUsers)
+    let lowerCase = input.toLowerCase()
+    let filteredUsers = this.data.filter(user => user.name.toLowerCase().includes(lowerCase))
+    if (filteredUsers.length > 0) {
+      domUpdates.searchCustomers(filteredUsers)
       return filteredUsers;
     } else {
       domUpdates.promptNewUser();
