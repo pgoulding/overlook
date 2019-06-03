@@ -43,6 +43,11 @@ const domUpdates = {
 
   showMostBooked(date) {
     $('#rooms__most-booked').html(`<h3>The date with the most rooms open is ${date}</h3>`)
+  },
+
+  displayUser(displayUser) {
+    $('#customer__name-current').text('')
+    $('#customer__name-current').text(`Customer: ${displayUser}`)
   }
 }
 
