@@ -29,6 +29,26 @@ class BookingRepo {
     return mostBooked[0]
   }
 
+  findRoomsForDate(date) {
+    let foundRooms =  this.data.filter(reservation => reservation.date !== date)
+    if (foundRooms.length === 0) {
+      return 'No Rooms Avaiable'
+    } else {
+      return foundRooms;
+    }
+  }
+
+  findRoomsByType(type, roomData, date) {
+    let currentDatesRooms = this.findRoomsForDate(date)
+    let roomsAvailable = roomData.filter(rooms => {
+      let available  = currentDatesRooms.find(filtered => filtered.roomNumber === rooms.number)
+      if (available && rooms.roomType === type) {
+        return rooms
+      }
+    })
+    return roomsAvailable
+  } 
+
 }
 
 
