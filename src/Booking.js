@@ -1,3 +1,5 @@
+import domUpdates from "./domUpdates";
+
 class Booking {
   constructor(data, userID, date) {
     this.data = data;
@@ -6,7 +8,14 @@ class Booking {
   }
 
   findBookings() {
-    this.data.filter
+    let customerBookings = this.data.filter(bookingData => bookingData.userID === this.userID)
+    if(customerBookings.length === 0) {
+      domUpdates.noBookings()
+      return 'No Bookings Found'
+    } else {
+      domUpdates.allCustomerBookings(customerBookings)
+      return customerBookings
+    }
   }
 }
 
