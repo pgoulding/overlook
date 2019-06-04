@@ -470,4 +470,44 @@ const roomServices = [
   }
 ];
 
-export { users, rooms, bookings, roomServices };
+const menu = [
+  {
+    userID: null,
+    date: null,
+    food: "Reuben Sandwich",
+    totalCost: 17.39
+  },
+  {
+    userID: null,
+    date: null,
+    food: "PBJ Sandwich",
+    totalCost: 5.46
+  },
+  {
+    userID: null,
+    date: null,
+    food: "Tuna Sandwich",
+    totalCost: 12.39
+  },
+  {
+    userID: null,
+    date: null,
+    food: "Ham Sandwich",
+    totalCost: 8.19
+  },
+  {
+    userID: null,
+    date: null,
+    food: "Crab Sandwich",
+    totalCost: 15.23
+  },
+  {
+    userID: null,
+    date: null,
+    food: "Turkey Sandwich",
+    totalCost: 7.26
+  }
+]
+
+
+export { users, rooms, bookings, roomServices, menu };
