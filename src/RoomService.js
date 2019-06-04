@@ -23,18 +23,19 @@ class RoomService {
     if (!dayCost) {
       return 'No Information to display' 
     } else {
-      
       return dayCost;
     }
   }
 // - Total dollar amount spent on room service for a all days ever
   forAllDays() {
-    let totalCost = this.breakDown().reduce((acc, item) => acc += item.totalCost, 0)
-    if (!totalCost) {
-      return 'No Information to Display'
-    } else {
-      domUpdates.totalOrdersCost()
-      return totalCost;
+    if (this.breakDown() !== 'No Information to display') {
+      let totalCost = this.breakDown().reduce((acc, item) => acc += item.totalCost, 0)
+      if (!totalCost) {
+        return 'No Information to Display'
+      } else {
+        domUpdates.totalOrdersCost(totalCost)
+        return totalCost;
+      }
     }
   }
 
