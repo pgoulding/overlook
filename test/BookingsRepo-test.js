@@ -2,7 +2,7 @@ import BookingRepo from '../src/BookingsRepo'
 import chai from 'chai';
 import spies from 'chai-spies'
 import domUpdates from '../src/domUpdates'
-import { bookings } from '../data'
+import { bookings, rooms } from '../data'
 const expect = chai.expect;
 chai.use(spies)
 chai.spy.on(domUpdates, 'showMostBooked', () => true)
@@ -39,6 +39,15 @@ describe('Booking Repo', function () {
 
   it('should find the least popular date', function () {
     expect(bookingRepo.leastBookedDate()).to.equal('28/09/2019')
+  })
+
+  it('should find the rooms available on date', function () {
+    expect(bookingRepo.findRoomsForDate('25/08/2019')).to.be.an('array');
+    expect(bookingRepo.findRoomsForDate('25/08/2019')).to.have.length(16);
+  })
+
+  it('should find the rooms by whatevs', function () {
+    expect(bookingRepo.findRoomsByType('junior suite', rooms, '25/08/2019')).to.have.length(5)
   })
 
 })

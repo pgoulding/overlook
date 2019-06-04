@@ -60,11 +60,13 @@ import './images/turing-logo.png'
 import domUpdates from './domUpdates';
 import RoomServiceRepo from './RoomServiceRepo';
 import BookingRepo from './BookingsRepo';
+import Customer from './Customer';
 
 let userRepo;
 let main; 
 let orderRepo;
 let bookingRepo;
+let user;
 // let roomRepo;
 $(document).ready(function () {
   
@@ -97,8 +99,10 @@ $('#tab__customers-search').on('input', function () {
     userRepo.showUsers(typed)
     $('.tab__customers-output li').on('click', function () {
       let customerID = $(this).attr('data-id')
-      // showCustomerData(customerID)
-      console.log(customerID)
+      let parsedID = parseInt(customerID)
+      console.log(parsedID)
+      user = new Customer(data.users, parsedID, undefined)
+      
     })
   } else {
     domUpdates.promptNewUser()
