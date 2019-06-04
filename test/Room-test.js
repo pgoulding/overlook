@@ -26,13 +26,7 @@ describe('Rooms', function () {
   })
 
   it('should base it\'s data off the room number supplied', function () {
-    expect(room.data).to.be.an('array')
-    room.findRoom()
-    expect(room.roomType).to.equal('single room')
-    expect(room.bidet).to.equal(false)
-    expect(room.bedSize).to.equal('queen')
-    expect(room.numBeds).to.equal(1)
-    expect(room.costPerNight).to.equal(344.89)
+
   })
 
 
