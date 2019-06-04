@@ -92,6 +92,14 @@ $(document).ready(function () {
     $("#" + tab_id).addClass('current');
   })
   
+  const reorder = dateSpec => {
+    console.log(dateSpec)
+    let splitDate = dateSpec.split('-')
+    let year = splitDate[0]
+    let month = splitDate[1]
+    let day = splitDate[2]
+    return `${day}/${month}/${year}`
+  }
 
   $('#tab__customers-search').on('input', function () {
     let typed = $('#tab__customers-search').val()
@@ -104,7 +112,7 @@ $(document).ready(function () {
         user = new Customer(data.users, parsedID, undefined)
         roomService = new RoomService(data.services, parsedID)
         roomService.breakDown()
-        roomService.perDate(todaysDate)
+        // roomService.perDate(todaysDate)
         roomService.forAllDays()
       })
     } else {
@@ -112,18 +120,18 @@ $(document).ready(function () {
     }
   })
 
+
   $('#orders__date-submit').on('click', function () {
-    const reorder = () => {
-      let dateSpec = $('#orders__date-select').val()
-      let splitDate = dateSpec.split('-')
-      let year = splitDate[0]
-      let month = splitDate[1]
-      let day = splitDate[2]
-      return `${day}/${month}/${year}`
-    }
     // console.log(reorder())
-    orderRepo.totalServicesDate(reorder())
+    let selectedDate = $('#orders__date-select').val()
+    orderRepo.totalServicesDate(reorder(selectedDate))
   })
+$('#book-room').on('click', function () {
+  let roomType = $('#booking-form input[type=radio][name=room-type]:checked').val()
+  let dateSelected = $('#room-book-date').val()
+  console.log(roomType);
+  bookingRepo.findRoomsByType(roomType, data.rooms, reorder(dateSelected))
+})
 
 })
 // const allUsers = new UserRepo(data.users)
