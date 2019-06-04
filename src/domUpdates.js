@@ -16,7 +16,6 @@ const domUpdates = {
   },
 
   searchCustomers(users) {
-
     $('#no-users').text('')
     $('.tab__customers-output').text('')
     users.forEach(user => {
@@ -30,11 +29,16 @@ const domUpdates = {
   },
 
   allRoomServiceOnDate(services) {
-    services.forEach(service => {
-      $('#orders__todays-room-service').append(`<tr>
-        <td>${service.food}</td><td>$${service.totalCost}</td>
-        </tr>`)
-    })
+    if (services.length === 0) {
+      $('#orders__todays-room-service').text('No Orders on that date')
+    } else {
+      services.forEach(service => {
+        $('#orders__todays-room-service').text('')
+        $('#orders__todays-room-service').append(`<tr>
+          <td>${service.food}</td><td>$${service.totalCost}</td>
+          </tr>`)
+      })
+    }
   },
 
   showLeastBooked(date) {
@@ -48,7 +52,41 @@ const domUpdates = {
   displayUser(displayUser) {
     $('#customer__name-current').text('')
     $('#customer__name-current').text(`Customer: ${displayUser}`)
-  }
+    $('#cutomer__orders-name').text(`${displayUser}'s Food Orders`)
+  },
+
+  ordersBreakDown(orders) {
+    $('#orders__customers-room-service').text('')
+    orders.forEach(order => {
+      $('#orders__customers-room-service').append(`<tr>
+          <td>${order.food}</td><td>$${parseFloat(order.totalCost).toFixed(2)}</td><td>${order.date}</td>
+          </tr>`)
+    })
+  },
+
+  totalOrdersCost(cost) {
+    $('#customer__orders-total').text(`Total: ${parseFloat(cost).toFixed(2)}`)
+  },
+
+  // allCustomersBookings(bookings) {
+  //   bookings.forEach(booking => {
+  //     $('#orders__customers-room-service').append(`<tr>
+  //         <td>${order.food}</td><td>$${parseFloat(order.totalCost).toFixed(2)}</td><td>${order.date}</td>
+  //         </tr>`)
+  //   })
+  // },
+
+  roomTypes(rooms) {
+    $('#rooms__book-room').text('')
+
+    rooms.forEach(room => {
+      $('#rooms__book-room').append(`<tr>
+          <td>${room.number}</td><td>${room.bedSize}</td><<td>${room.numBeds}</td><td>${room.bidet}</td><td>$${room.costPerNight}</td>
+          </tr>`)
+    })
+  },
+
+
 }
 
 export default domUpdates
