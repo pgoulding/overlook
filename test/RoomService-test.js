@@ -33,7 +33,6 @@ describe('Room Service', function () {
 
   it('should give a price breakdown for the customers room service data with ', function () {
     expect(roomService.breakDown()).to.be.a('array').and.have.length(1)
-    console.log(roomService.breakDown())
   })
 
   it('should find out how much a user has spent for a specific date', function () {
