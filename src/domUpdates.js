@@ -5,6 +5,7 @@ const domUpdates = {
     console.log('rooms', rooms)
     $('#main__rooms-available').html(`<h3>Today we have ${rooms} rooms available</h3>`)
   },
+
   todaysDebt (money) {
     console.log('money', money)
     $('#main__todays-income').html(`<h3>We have made $${parseFloat(money).toFixed(2)} total today</h3>`)
@@ -45,16 +46,24 @@ const domUpdates = {
   },
 
   showLeastBooked(date) {
-    $('#rooms__least-booked').html(`<h3>The Most Booked Date is ${date}</h3>`)
+    $('#rooms__least-booked').html(`<h3>The Most Booked Date is ${this.reformatDate(date)}</h3>`)
   },
 
   showMostBooked(date) {
-    $('#rooms__most-booked').html(`<h3>The date with the most rooms open is ${date}</h3>`)
+    $('#rooms__most-booked').html(`<h3>The date with the most rooms open is ${this.reformatDate(date)}</h3>`)
+  },
+
+  reformatDate(specDate) {
+    let splitArr = specDate.split('/')
+    let day = splitArr[0]
+    let month = splitArr[1]
+    let year = splitArr[2]
+    return `${month}/${day}/${year}`
   },
 
   displayUser(displayUser) {
     $('#customer__name-current').text('')
-    $('#customer__name-current').html(` <li class="tab-link" id="customer__name-current" data-userID="${displayUser.id}" data-tab="tab__current-customer">Customer: ${displayUser.name}</li>`)
+    $('#customer__name-current').text(`Customer: ${displayUser.name}`)
     $('#cutomer__orders-name').text(`${displayUser.name}'s Food Orders`)
   },
 
@@ -72,9 +81,10 @@ const domUpdates = {
   },
 
   allCustomersBookings(bookings) {
+    $('#customer__booked-info').find('tr:gt(0)').remove();
     bookings.forEach(booking => {
       $('#rooms__customer-booked-current').append(`<tr>
-          <td>${booking.roomNumber}</td><td>${booking.date}</td><td><button data-id="${booking.userID}" id="cancel-booking">Cancel Booking</button></td>
+          <td>${booking.roomNumber}</td><td>${booking.date}</td><td><button data-date="${booking.date}" data-room="${booking.roomNumber}" data-id="${booking.userID}" class="cancel-booking">Cancel Booking</button></td>
           </tr>`)
     })
   },
@@ -89,8 +99,8 @@ const domUpdates = {
   },
 
   addRoom(room) {
-    $('#rooms__customer-booked').append(`<tr>
-          <td>${room.roomNumber}</td><td>$${room.date}</td><button data-id="${room.userID}" id="cancel-booking">Cancel Booking</button>
+    $('#rooms__customer-booked-current').append(`<tr>
+          <td>${room.roomNumber}</td><td>${room.date}</td><td><button data-date="${room.date}" data-room="${room.roomNumber}" data-id="${room.userID}" class="cancel-booking">Cancel Booking</button></td>
           </tr>`)
   }
 

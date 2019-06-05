@@ -52,9 +52,8 @@
         <p id="customer__orders-total"></p>
       </div>
       <div id="tab__rooms" class="tab-content">
-        <div id="customer__booked-info">
-          <h3 id="customer__rooms-booked-Name">Rooms Available</h3>
-          <table>
+          <table id="customer__booked-info">
+              <h3 id="customer__rooms-booked-Name">Rooms Available</h3>
           <thead>
             <tr>
               <th>Room Number</th>
@@ -64,16 +63,18 @@
             <tbody id="rooms__customer-booked-current">
             </tbody>
           </table>
-        </div>  
-        <h2>Book A Room</h2>
         <form id="booking-form">
-          <input type="radio" name="room-type" value="residential suite">Residential Suite</input>
-          <input type="radio" name="room-type" value="junior suite">Junior Suite</input>
-          <input type="radio" name="room-type" value="suite">Basic Suite</input>
-          <input type="radio" name="room-type" value="single room">Single Room</input>
-          <input type="date" id="room-book-date">
+          <legend>Book A Room</legend>
+          <label><input type="radio" name="room-type" value="residential suite">Residential Suite</label>
+          <label><input type="radio" name="room-type" value="junior suite">Junior Suite</label>
+          <label><input type="radio" name="room-type" value="suite">Basic Suite</label>
+          <label><input type="radio" name="room-type" value="single room">Single Room</label>
+          <label>
+            Date To Book
+            <input type="date" id="room-book-date">
+          </label>
         </form>
-        <button id="book-room" type="submit">Book It!</button>
+        <button id="book-room" type="submit">Find Rooms</button>
         <table>
           <h3 id="customer__rooms-available">Rooms Available</h3>
           <thead>
