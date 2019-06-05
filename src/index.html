@@ -4,14 +4,15 @@
     <title>Webpack Starter Kit</title>
   </head>
   <body>
-    <h1>Overlook</h1>
+    <h2 id="welcome-screen">Welcome to Overlook Hotel Management Systems</h2>
     <div class="container">
+        <h1>Overlook</h1>
       <ul class="tabs">
         <li class="tab-link current" data-tab="tab__main">Main</li>
         <li class="tab-link" data-tab="tab__orders" >Orders</li>
         <li class="tab-link" data-tab="tab__rooms">Rooms</li>
         <li class="tab-link" data-tab="tab__customers">Customers</li>
-        <li class="tab-link" id="customer__name-current" data-tab="tab__current-customer">No User Selected</li>
+        <p class="tab-link" id="customer__name-current">No User Selected</p>
       </ul>
       <div id="tab__main" class="tab-content current">
         <p id="main__rooms-available"></p>
@@ -53,7 +54,7 @@
       </div>
       <div id="tab__rooms" class="tab-content">
           <table id="customer__booked-info">
-              <h3 id="customer__rooms-booked-Name">Rooms Available</h3>
+              <h3 id="customer__rooms-booked-Name">Reservations</h3>
           <thead>
             <tr>
               <th>Room Number</th>
@@ -63,40 +64,40 @@
             <tbody id="rooms__customer-booked-current">
             </tbody>
           </table>
-        <form id="booking-form">
-          <legend>Book A Room</legend>
-          <label><input type="radio" name="room-type" value="residential suite">Residential Suite</label>
-          <label><input type="radio" name="room-type" value="junior suite">Junior Suite</label>
-          <label><input type="radio" name="room-type" value="suite">Basic Suite</label>
-          <label><input type="radio" name="room-type" value="single room">Single Room</label>
-          <label>
-            Date To Book
-            <input type="date" id="room-book-date">
-          </label>
-        </form>
-        <button id="book-room" type="submit">Find Rooms</button>
-        <table>
-          <h3 id="customer__rooms-available">Rooms Available</h3>
-          <thead>
-            <tr>
-              <th>Room Number</th>
-              <th>Bed Size</th>
-              <th>Number of Beds</th>
-              <th>Bidet</th>
-              <th>Cost Per Night</th>
-            </tr>
-          </thead>
-          <tbody id="rooms__book-room">
-          </tbody>
-        </table>
+          <div class="booking-info">
+            <form id="booking-form">
+              <legend>Book A Room</legend>
+              <label><input type="radio" name="room-type" value="residential suite"> Residential Suite</label>
+              <label><input type="radio" name="room-type" value="junior suite"> Junior Suite</label>
+              <label><input type="radio" name="room-type" value="suite"> Basic Suite</label>
+              <label><input type="radio" name="room-type" value="single room"> Single Room</label>
+              <label>
+                Date To Book
+                <input type="date" id="room-book-date">
+              </label>
+              <button id="book-room" type="submit">Find Rooms</button>
+            </form>
+            <table id="booking-output">
+              <h3 id="customer__rooms-available">Rooms Available</h3>
+              <thead>
+                <tr>
+                  <th>Room Number</th>
+                  <th>Bed Size</th>
+                  <th>Number of Beds</th>
+                  <th>Bidet</th>
+                  <th>Cost Per Night</th>
+                </tr>
+              </thead>
+              <tbody id="rooms__book-room">
+              </tbody>
+            </table>
+          </div>
       </div>
       <div id="tab__customers" class="tab-content">
         <input id="tab__customers-search" type="search" placeholder="Search Customers">
         <ul class="tab__customers-output">
           <li id="no-users">No Users Found</li>
         </ul>
-      </div>
-      <div id="tab__current-customer">
       </div>
     </div>
   </body>

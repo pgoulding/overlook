@@ -5,11 +5,18 @@ $tab-background:#5588a3;
 $primary-font-color: #e8e8e8;
 $secondary-font-color:#00334e;
 
+html{
+  background-image: linear-gradient(rgba(0, 51, 78, 0.7), rgba(0, 51, 78, .7)), url('../images/background-img.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
 body{
   margin-top: 100px;
   font-family: 'Trebuchet MS', serif;
   line-height: 1.6;
-  background-color: $primary-background;
   color:$primary-font-color;
 }
 
@@ -20,57 +27,77 @@ h1{
 .container{
   width: 800px;
   margin: 0 auto;
+  ul{
+    &.tabs{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    background-color: $secondary-background;
+      li{
+        background-color: $secondary-background;
+        display: inline-block;
+        padding: 10px 15px;
+        cursor: pointer;
+        &.current{
+          background-color: $tab-background;
+          color: $secondary-font-color;
+        }
+      }
+    }
+  }
 }
 
-ul.tabs{
-  margin: 0px;
-  padding: 0px;
-  list-style: none;
-  background-color: $secondary-background;
+#welcome-screen{
+  margin:20px 30%;
+  font-size: 4rem;
+  text-align:center;
 }
 
-ul.tabs li{
-  background-color: $secondary-background;
-  display: inline-block;
-  padding: 10px 15px;
-  cursor: pointer;
-}
+// #booking-form{
+//   width: fit-content;
+//   margin: auto;
+// }
 
-ul.tabs li.current{
-  background-color: $tab-background;
-  color: $secondary-font-color;
-}
+// .booking-info {
+//   display: flex;
+// }
 
 .tab-content{
   display: none;
   background-color: $secondary-background;
   color:$primary-font-color;
   padding: 15px;
-}
-
-.tab-content.current{
-  display: inherit;
-  background-color: $tab-background;
-  color: $secondary-font-color;
+  &.current {
+    display: inherit;
+    background-color: $tab-background;
+    color: $secondary-font-color;
+  }
 }
 
 #customer__name-current{
   float: right;
+  padding: 10px 15px;
+  margin: 0;
 }
 
 form {
   display: flex;
   flex-direction: column;
+  width: fit-content;
   legend{
     font-weight:700;
     font-size:1.25em;
   }
+  #room-book-date{
+    display: block;
+  }
 }
 
 table {
+  border:2px solid $secondary-background;
   text-align: center;
   th {
-    
+    border-bottom: 2px solid $secondary-background;
   }
 
   tr:nth-child(2n){
