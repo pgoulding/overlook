@@ -16,7 +16,7 @@ const domUpdates = {
   },
 
   occupation(percent) {
-    $('#main__occupation-rate').html(`<h3>We are ${percent}% unoccupied today`)
+    $('#main__occupation-rate').html(`<h3>We are ${percent}% occupied today`)
   },
 
   searchCustomers(users) {
@@ -68,12 +68,14 @@ const domUpdates = {
   },
 
   ordersBreakDown(orders) {
-    $('#orders__customers-room-service').text('')
-    orders.forEach(order => {
-      $('#orders__customers-room-service').append(`<tr>
-          <td>${order.food}</td><td>$${parseFloat(order.totalCost).toFixed(2)}</td><td>${order.date}</td>
-          </tr>`)
-    })
+    if(orders.length) {
+      $('#orders__customers-room-service').text('')
+      orders.forEach(order => {
+        $('#orders__customers-room-service').append(`<tr>
+            <td>${order.food}</td><td>$${parseFloat(order.totalCost).toFixed(2)}</td><td>${order.date}</td>
+            </tr>`)
+      })
+    }
   },
 
   totalOrdersCost(cost) {
@@ -102,6 +104,12 @@ const domUpdates = {
     $('#rooms__customer-booked-current').append(`<tr>
           <td>${room.roomNumber}</td><td>${room.date}</td><td><button data-date="${room.date}" data-room="${room.roomNumber}" data-id="${room.userID}" class="cancel-booking">Cancel Booking</button></td>
           </tr>`)
+  },
+
+  displayMenu(menu) {
+    menu.forEach(sandwich => {
+      $('#room__service-menu').append(`<tr><td>${sandwich.food}</td><td>$${sandwich.totalCost}</td><td><button data-food=${sandwich.food}>Order</button></td>`)
+    })
   }
 
 
