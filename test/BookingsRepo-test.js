@@ -7,6 +7,8 @@ const expect = chai.expect;
 chai.use(spies)
 chai.spy.on(domUpdates, 'showMostBooked', () => true)
 chai.spy.on(domUpdates, 'showLeastBooked', () => true)
+chai.spy.on(domUpdates, 'roomTypes', () => true)
+chai.spy.on(domUpdates, 'addRoom', () => true)
 
 describe('Booking Repo', function () {
   
@@ -48,6 +50,17 @@ describe('Booking Repo', function () {
 
   it('should find the rooms by whatevs', function () {
     expect(bookingRepo.findRoomsByType('junior suite', rooms, '25/08/2019')).to.have.length(5)
+  })
+
+  it('should be able to book a room for a cutomer', function () {
+    expect(bookingRepo.data).to.have.length(20)
+    expect(bookingRepo.bookRoom(1, '26/10/2019', 7)).to.eql({
+      userID: 7,
+      date: '26/10/2019',
+      roomNumber: 1
+    })
+    expect(bookingRepo.data).to.have.length(21)
+    
   })
 
 })

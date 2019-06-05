@@ -18,12 +18,15 @@
         <p id="main__todays-income"></p>
         <p id="main__todays-service-charges"></p>
         <p id="main__occupation-rate"></p>
-      </div>
-      <div id="tab__orders" class="tab-content">
+        <p id="rooms__most-booked"></p>
+        <p id="rooms__least-booked"></p>
+        <input type="date" id="orders__date-select">
+        <button id="orders__date-submit">Find Orders</button>
         <table>
+          <h3>Food Orders Today</h3>
           <thead>
             <tr>
-              <th>Food Orders</th>
+              <th>Food</th>
               <th>Cost</th>
             </tr>
           </thead>
@@ -31,9 +34,60 @@
           </tbody>
         </table>
       </div>
+      <div id="tab__orders" class="tab-content">
+        <input type="date" id="customer__orders-date-select">
+        <button id="customer__orders-date-submit"></button>
+        <table>
+          <h3 id="cutomer__orders-name">Food Orders</h3>
+          <thead>
+            <tr>
+              <th>Food</th>
+              <th>Cost</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="orders__customers-room-service">
+          </tbody>
+        </table>
+        <p id="customer__orders-total"></p>
+      </div>
       <div id="tab__rooms" class="tab-content">
-        <p id="rooms__most-booked"></p>
-        <p id="rooms__least-booked"></p>
+        <div id="customer__booked-info">
+          <h3 id="customer__rooms-booked-Name">Rooms Available</h3>
+          <table>
+          <thead>
+            <tr>
+              <th>Room Number</th>
+              <th>Date Booked</th>
+            </tr>
+            </thead>
+            <tbody id="rooms__customer-booked-current">
+            </tbody>
+          </table>
+        </div>  
+        <h2>Book A Room</h2>
+        <form id="booking-form">
+          <input type="radio" name="room-type" value="residential suite">Residential Suite</input>
+          <input type="radio" name="room-type" value="junior suite">Junior Suite</input>
+          <input type="radio" name="room-type" value="suite">Basic Suite</input>
+          <input type="radio" name="room-type" value="single room">Single Room</input>
+          <input type="date" id="room-book-date">
+        </form>
+        <button id="book-room" type="submit">Book It!</button>
+        <table>
+          <h3 id="customer__rooms-available">Rooms Available</h3>
+          <thead>
+            <tr>
+              <th>Room Number</th>
+              <th>Bed Size</th>
+              <th>Number of Beds</th>
+              <th>Bidet</th>
+              <th>Cost Per Night</th>
+            </tr>
+          </thead>
+          <tbody id="rooms__book-room">
+          </tbody>
+        </table>
       </div>
       <div id="tab__customers" class="tab-content">
         <input id="tab__customers-search" type="search" placeholder="Search Customers">
@@ -42,7 +96,6 @@
         </ul>
       </div>
       <div id="tab__current-customer">
-        <h3>You should put something in here at some point.</h3>
       </div>
     </div>
   </body>

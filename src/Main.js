@@ -5,42 +5,37 @@ class Main {
     this.bookingsData = bookings;
     this.servicesData = service;
     this.roomData = rooms;
-    this.date = date;
-    this.roomsAvailable = this.roomsAvail()
-    this.debts = this.debtsToday()
-    this.occupationRate = this.occupationPercentage()
+    this.info = this.updateInfo(date)
   }
 
-  roomsAvail() {
-    let rooms = this.roomData.length - this.bookingsData.filter(room => this.date === room.date).length
-    domUpdates.availableRoomsNum(rooms)
+  roomsAvailable(specDate) {
+    let rooms = this.roomData.length - this.bookingsData.filter(room => specDate === room.date).length
+    console.log(rooms)
     return rooms;
   }
 
   debtsToday() {
-    let services = this.servicesMoney()
-    let bookings = this.bookingsMoney()
+    let services = this.servicesMoney() || 0
+    let bookings = this.bookingsMoney() || 0
     let total = Math.floor(bookings += services);
-    domUpdates.todaysDebt(total)
     return total
   }
 
-  servicesMoney() {
-    let todaysInvoices = [...this.servicesData].filter(service => service.date === this.date)
+  servicesMoney(specDate) {
+    let todaysInvoices = this.servicesData.filter(service => service.date === specDate)
     let money = todaysInvoices.reduce((acc, service) => {
       acc += service.totalCost
       return acc
     }, 0)
-    domUpdates.todaysServiceCharges(money)
     return money
   }
 
-  bookingsMoney() {
-    let todaysInvoices = [...this.bookingsData].filter(booking => booking.date === this.date)
+  bookingsMoney(specDate) {
+    let todaysInvoices = this.bookingsData.filter(booking => booking.date === specDate)
     let costPerRoom = todaysInvoices.map(room => {
       return { 
         roomNum: room.roomNumber, 
-        roomCost: [...this.roomData].find(item => item.number === room.roomNumber).costPerNight
+        roomCost: this.roomData.find(item => item.number === room.roomNumber).costPerNight
       }
     })
 
@@ -51,10 +46,18 @@ class Main {
     return money
   }
 
-  occupationPercentage() {
-    let percent = Math.floor((this.roomsAvailable / this.roomData.length) * 100);
-    domUpdates.occupation(percent)
-    return percent;
+  occupationPercentage(specDate) {
+    let percent = this.roomsAvailable(specDate) / this.roomData.length * 100
+    let display = 100 - percent;
+    console.log(percent)
+    return Math.ceil(display);
+  }
+
+  updateInfo(day) {
+    domUpdates.occupation(this.occupationPercentage(day))
+    domUpdates.todaysServiceCharges(this.servicesMoney(day))
+    domUpdates.todaysDebt(this.bookingsMoney(day))
+    domUpdates.availableRoomsNum(this.roomsAvailable(day))
   }
 
 }

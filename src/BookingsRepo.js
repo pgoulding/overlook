@@ -46,6 +46,7 @@ class BookingRepo {
         return rooms
       }
     })
+    domUpdates.roomTypes(roomsAvailable, date)
     return roomsAvailable
   } 
 
