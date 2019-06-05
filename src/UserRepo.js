@@ -15,6 +15,17 @@ class UserRepo {
       return 'No Users Found, would you like to add one?';
     }
   }
+
+  createNewUser(userName) {
+    let highestID = [...this.data].map(ele => ele.id).sort((a, b) => a > b ? 1 : b > a ? -1 : 0).pop();
+    let newUser = {
+      id: ++highestID,
+      name: userName 
+    }
+    this.data.push(newUser)
+    return newUser
+  }
+
 }
 
 
