@@ -28,23 +28,20 @@ import $ from 'jquery';
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
+import './images/turing-logo.png'
 
 import Main from '../src/Main';
 import UserRepo from '../src/UserRepo'
-import RoomRepo from '../src/RoomRepo'
-// import Customer from '../src/Customer';
-// import RoomService from '../src/RoomService';
-// import Room from '../src/Room';
-// import BookingsRepo from '../src/BookingsRepo';
-// import RoomRepo from '../src/RoomRepo'
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
-import domUpdates from './domUpdates';
-import RoomServiceRepo from './RoomServiceRepo';
-import BookingRepo from './BookingsRepo';
 import Customer from './Customer';
-import RoomService from './RoomService';
+import RoomRepo from '../src/RoomRepo'
+import Room from '../src/Room';
+import RoomServiceRepo from './RoomServiceRepo';
+import RoomService from '../src/RoomService';
+import BookingRepo from './BookingsRepo';
+import Booking from './Booking'
+import domUpdates from './domUpdates';
+
+
 
 // let roomRepo;
 $(document).ready(function () {
@@ -54,6 +51,7 @@ $(document).ready(function () {
   let bookingRepo;
   let user;
   let roomService;
+  let customerBooking;
 
   const todaysDate = () => {
     let today = new Date();
@@ -76,9 +74,9 @@ $(document).ready(function () {
   console.log(todaysDate())
 
   setTimeout(() => {
-    main = new Main(data.bookings, data.services, data.rooms, '15/07/2019')
+    main = new Main(data.bookings, data.services, data.rooms, todaysDate())
     userRepo = new UserRepo(data.users)
-    orderRepo = new RoomServiceRepo(data.services, '15/07/2019')
+    orderRepo = new RoomServiceRepo(data.services, todaysDate)
     bookingRepo = new BookingRepo(data.bookings)
   }, 3000);
 
@@ -93,7 +91,6 @@ $(document).ready(function () {
   })
   
   const reorder = dateSpec => {
-    console.log(dateSpec)
     let splitDate = dateSpec.split('-')
     let year = splitDate[0]
     let month = splitDate[1]
@@ -111,9 +108,13 @@ $(document).ready(function () {
         console.log(parsedID)
         user = new Customer(data.users, parsedID, undefined)
         roomService = new RoomService(data.services, parsedID)
+        customerBooking = new Booking(data.bookings, parsedID)
+        customerBooking.findBookings()
+
         roomService.breakDown()
         // roomService.perDate(todaysDate)
         roomService.forAllDays()
+
       })
     } else {
       domUpdates.promptNewUser()
@@ -126,12 +127,21 @@ $(document).ready(function () {
     let selectedDate = $('#orders__date-select').val()
     orderRepo.totalServicesDate(reorder(selectedDate))
   })
-$('#book-room').on('click', function () {
-  let roomType = $('#booking-form input[type=radio][name=room-type]:checked').val()
-  let dateSelected = $('#room-book-date').val()
-  console.log(roomType);
-  bookingRepo.findRoomsByType(roomType, data.rooms, reorder(dateSelected))
-})
+  $('#book-room').on('click', function () {
+    let roomType = $('#booking-form input[type=radio][name=room-type]:checked').val()
+    let dateSelected = $('#room-book-date').val()
+    bookingRepo.findRoomsByType(roomType, data.rooms, reorder(dateSelected))
+    $('.book-this-room').on('click', function () {
+      let roomNum = $(this).data('room')
+      let dateSelect = $(this).data('date')
+      customerBooking.bookRoom(roomNum, dateSelect, user.id)
+      main.updateInfo(todaysDate())
+      bookingRepo.mostBookedDate()
+      bookingRepo.leastBookedDate()
+      $(this).closest('tr').remove()
+    })
+  })
+
 
 })
 // const allUsers = new UserRepo(data.users)

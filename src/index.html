@@ -21,7 +21,7 @@
         <p id="rooms__most-booked"></p>
         <p id="rooms__least-booked"></p>
         <input type="date" id="orders__date-select">
-        <button id="orders__date-submit"></button>
+        <button id="orders__date-submit">Find Orders</button>
         <table>
           <h3>Food Orders Today</h3>
           <thead>
@@ -52,6 +52,19 @@
         <p id="customer__orders-total"></p>
       </div>
       <div id="tab__rooms" class="tab-content">
+        <div id="customer__booked-info">
+          <h3 id="customer__rooms-booked-Name">Rooms Available</h3>
+          <table>
+          <thead>
+            <tr>
+              <th>Room Number</th>
+              <th>Date Booked</th>
+            </tr>
+            </thead>
+            <tbody id="rooms__customer-booked-current">
+            </tbody>
+          </table>
+        </div>  
         <h2>Book A Room</h2>
         <form id="booking-form">
           <input type="radio" name="room-type" value="residential suite">Residential Suite</input>
