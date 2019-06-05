@@ -53,15 +53,6 @@ h1{
   text-align:center;
 }
 
-// #booking-form{
-//   width: fit-content;
-//   margin: auto;
-// }
-
-// .booking-info {
-//   display: flex;
-// }
-
 .tab-content{
   display: none;
   background-color: $secondary-background;
@@ -103,10 +94,6 @@ table {
   tr:nth-child(2n){
     background-color: $primary-background;
     color:$primary-font-color;
-  }
-
-  td {
-
   }
 
 }

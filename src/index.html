@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <title>OverLook Hotel Systems</title>
   </head>
   <body>
     <h2 id="welcome-screen">Welcome to Overlook Hotel Management Systems</h2>
-    <div class="container">
+    <main class="container">
         <h1>Overlook</h1>
       <ul class="tabs">
         <li class="tab-link current" data-tab="tab__main">Main</li>
@@ -14,7 +14,7 @@
         <li class="tab-link" data-tab="tab__customers">Customers</li>
         <p class="tab-link" id="customer__name-current">No User Selected</p>
       </ul>
-      <div id="tab__main" class="tab-content current">
+      <article id="tab__main" class="tab-content current">
         <p id="main__rooms-available"></p>
         <p id="main__todays-income"></p>
         <p id="main__todays-service-charges"></p>
@@ -34,10 +34,10 @@
           <tbody id="orders__todays-room-service">
           </tbody>
         </table>
-      </div>
-      <div id="tab__orders" class="tab-content">
+      </article>
+      <article id="tab__orders" class="tab-content">
         <input type="date" id="customer__orders-date-select">
-        <button id="customer__orders-date-submit"></button>
+        <button id="customer__orders-date-submit">Search Orders</button>
         <table>
           <h3 id="cutomer__orders-name">Food Orders</h3>
           <thead>
@@ -51,8 +51,8 @@
           </tbody>
         </table>
         <p id="customer__orders-total"></p>
-      </div>
-      <div id="tab__rooms" class="tab-content">
+      </article>
+      <article id="tab__rooms" class="tab-content">
           <table id="customer__booked-info">
               <h3 id="customer__rooms-booked-Name">Reservations</h3>
           <thead>
@@ -64,7 +64,7 @@
             <tbody id="rooms__customer-booked-current">
             </tbody>
           </table>
-          <div class="booking-info">
+          <section class="booking-info">
             <form id="booking-form">
               <legend>Book A Room</legend>
               <label><input type="radio" name="room-type" value="residential suite"> Residential Suite</label>
@@ -91,14 +91,14 @@
               <tbody id="rooms__book-room">
               </tbody>
             </table>
-          </div>
-      </div>
-      <div id="tab__customers" class="tab-content">
+          </section>
+        </article>
+      <article id="tab__customers" class="tab-content">
         <input id="tab__customers-search" type="search" placeholder="Search Customers">
         <ul class="tab__customers-output">
           <li id="no-users">No Users Found</li>
         </ul>
-      </div>
-    </div>
+      </article>
+    </main>
   </body>
 </html>
