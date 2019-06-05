@@ -41,9 +41,6 @@ import BookingRepo from './BookingsRepo';
 import Booking from './Booking'
 import domUpdates from './domUpdates';
 
-
-
-// let roomRepo;
 $(document).ready(function () {
   let userRepo;
   let main; 
@@ -71,8 +68,6 @@ $(document).ready(function () {
     return thisDay;
   }
 
-  console.log(todaysDate())
-
   setTimeout(() => {
     main = new Main(data.bookings, data.services, data.rooms, todaysDate())
     userRepo = new UserRepo(data.users)
@@ -82,14 +77,14 @@ $(document).ready(function () {
 
   $('ul.tabs li').click(function () {
     var tab_id = $(this).attr('data-tab');
-
     $('ul.tabs li').removeClass('current');
     $('.tab-content').removeClass('current');
-
     $(this).addClass('current');
     $("#" + tab_id).addClass('current');
   })
   
+  $('#customer__booked-info').hide()
+
   const reorder = dateSpec => {
     let splitDate = dateSpec.split('-')
     let year = splitDate[0]
@@ -110,11 +105,17 @@ $(document).ready(function () {
         roomService = new RoomService(data.services, parsedID)
         customerBooking = new Booking(data.bookings, parsedID)
         customerBooking.findBookings()
-
         roomService.breakDown()
         // roomService.perDate(todaysDate)
         roomService.forAllDays()
-
+        $('#customer__booked-info').show()
+        $('.cancel-booking').on('click', function () {
+          console.log('clicked')
+          let roomNum = $(this).data('room')
+          let dateSelect = $(this).data('date')
+          customerBooking.cancelBooking(roomNum, dateSelect, user.id)
+          $(this).closest('tr').remove()
+        })
       })
     } else {
       domUpdates.promptNewUser()
@@ -135,6 +136,13 @@ $(document).ready(function () {
       let roomNum = $(this).data('room')
       let dateSelect = $(this).data('date')
       customerBooking.bookRoom(roomNum, dateSelect, user.id)
+      $('.cancel-booking').on('click', function () {
+        console.log('clicked')
+        let roomNum = $(this).data('room')
+        let dateSelect = $(this).data('date')
+        customerBooking.cancelBooking(roomNum, dateSelect, user.id)
+        $(this).closest('tr').remove()
+      })
       main.updateInfo(todaysDate())
       bookingRepo.mostBookedDate()
       bookingRepo.leastBookedDate()
