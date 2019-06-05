@@ -84,7 +84,7 @@ $(document).ready(function () {
         roomService = new RoomService(data.services, data.menu, parsedID)
         customerBooking = new Booking(data.bookings, parsedID)
         customerBooking.findBookings()
-        roomService.updateInfo(todaysDate())
+        // roomService.updateInfo(todaysDate())
         domUpdates.displayMenu(data.menu)
         $('#room__service-menu button').click(function () {
           let sammich = $(this).data('food')
