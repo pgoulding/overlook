@@ -10,13 +10,12 @@ class Main {
 
   roomsAvailable(specDate) {
     let rooms = this.roomData.length - this.bookingsData.filter(room => specDate === room.date).length
-    console.log(rooms)
     return rooms;
   }
 
-  debtsToday() {
-    let services = this.servicesMoney() || 0
-    let bookings = this.bookingsMoney() || 0
+  debtsToday(specDate) {
+    let services = this.servicesMoney(specDate) || 0
+    let bookings = this.bookingsMoney(specDate) || 0
     let total = Math.floor(bookings += services);
     return total
   }
@@ -49,7 +48,6 @@ class Main {
   occupationPercentage(specDate) {
     let percent = this.roomsAvailable(specDate) / this.roomData.length * 100
     let display = 100 - percent;
-    console.log(percent)
     return Math.ceil(display);
   }
 

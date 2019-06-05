@@ -6,7 +6,8 @@ import { bookings } from '../data'
 const expect = chai.expect;
 chai.use(spies)
 chai.spy.on(domUpdates, 'noBookings', () => true)
-chai.spy.on(domUpdates, 'allCustomerBookings', () => true)
+chai.spy.on(domUpdates, 'allCustomersBookings', () => true)
+chai.spy.on(domUpdates, 'addRoom', () => true)
 
 describe('Booking', function () {
   
@@ -34,6 +35,17 @@ describe('Booking', function () {
 
     const booking2 = new Booking(bookings, 223424, 'squirrels')
     expect(booking2.findBookings()).to.equal('No Bookings Found')
+  })
+
+  it('should be able to book a room for a cutomer', function () {
+    expect(booking.data).to.have.length(20)
+    expect(booking.bookRoom(1, '26/10/2019', 7)).to.eql({
+      userID: 7,
+      date: '26/10/2019',
+      roomNumber: 1
+    })
+    expect(booking.data).to.have.length(21)
+
   })
 
   // it('should')

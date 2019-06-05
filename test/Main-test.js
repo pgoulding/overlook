@@ -29,30 +29,30 @@ describe('Main', function () {
 
   it('should show how many rooms are still available on a specific date', function () {
     expect(rooms.length).to.equal(20)
-    expect(main.roomsAvailable).to.equal(17)
+    expect(main.roomsAvailable('21/08/2019')).to.equal(17)
   })
 
   it('should show how the debts owed/earned for services for todays date', function () {
-    expect(main.servicesMoney()).to.eql(34.94)
+    expect(main.servicesMoney('21/08/2019')).to.eql(34.94)
   })
 
   it('should show how the debts owed/earned for bookings for todays date', function () {
-    expect(main.bookingsMoney()).to.equal(774.92)
+    expect(main.bookingsMoney('21/08/2019')).to.equal(774.92)
   })
 
   it('should show how the total debts owed/earned for todays date', function () {
-    expect(main.debtsToday()).to.eql(809)
+    expect(main.debtsToday('21/08/2019')).to.eql(809)
   })
 
   it('should show the current occupation rate', function () {
-    expect(main.occupationRate).to.be.a('number')
-    expect(main.occupationRate).to.be.equal(85)
+    expect(main.occupationPercentage('21/08/2019')).to.be.a('number')
+    expect(main.occupationPercentage('21/08/2019')).to.be.equal(15)
   })
 
   it('should have error handling on all methods', function () {
-    let main2 = new Main(bookings, roomServices, rooms)
-    expect(main2.debts).to.eql(0)
-    expect(main2.occupationRate).to.equal(100)
+    let main2 = new Main(bookings, roomServices, rooms, '21/08/3019')
+    expect(main2.debtsToday('21/08/3019')).to.eql(0)
+    expect(main2.occupationPercentage('21/08/3019')).to.equal(0)
     
   })
   
