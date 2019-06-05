@@ -1,34 +1,11 @@
 /* eslint-disable max-len */
-
-const data = {};
-
-fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users')
-  .then(response => response.json())
-  .then(remote => data.users = remote.users)
-  .catch(err => console.error(err))
-
-fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/rooms/rooms')
-  .then(response => response.json())
-  .then(remote => data.rooms = remote.rooms)
-  .catch(err => console.error(err))
-
-fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/bookings/bookings')
-  .then(response => response.json())
-  .then(remote => data.bookings = remote.bookings)
-  .catch(err => console.error(err))
-
-fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServices')
-  .then(response => response.json())
-  .then(remote => data.services = remote.roomServices)
-  .catch(err => console.error(err))
-
-
 // An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 import './images/turing-logo.png'
+import './images/background-img.png'
 
 import Main from '../src/Main';
 import UserRepo from '../src/UserRepo'
@@ -40,6 +17,7 @@ import RoomService from '../src/RoomService';
 import BookingRepo from './BookingsRepo';
 import Booking from './Booking'
 import domUpdates from './domUpdates';
+import data from './fetchData'
 
 $(document).ready(function () {
   let userRepo;
