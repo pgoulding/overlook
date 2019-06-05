@@ -27,6 +27,12 @@ class Booking {
     return booking
   }
 
+  cancelBooking(room, reservedDate, user) {
+    let bookedRoom = this.data.find(booking => room === booking.roomNumber && reservedDate === booking.date && user === booking.userID)
+    let index = this.data.indexOf(bookedRoom)
+    return this.data.splice(index, 1)
+  }
+
 }
 
 
