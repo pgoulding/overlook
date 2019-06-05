@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>OverLook Hotel Systems</title>
+  </head>
+  <body>
+    <h2 id="welcome-screen">Welcome to Overlook Hotel Management Systems</h2>
+    <main class="container">
+        <h1>Overlook</h1>
+      <ul class="tabs">
+        <li class="tab-link current" data-tab="tab__main">Main</li>
+        <li class="tab-link" data-tab="tab__orders" >Orders</li>
+        <li class="tab-link" data-tab="tab__rooms">Rooms</li>
+        <li class="tab-link" data-tab="tab__customers">Customers</li>
+        <p class="tab-link" id="customer__name-current">No User Selected</p>
+      </ul>
+      <article id="tab__main" class="tab-content current">
+        <p id="main__rooms-available"></p>
+        <p id="main__todays-income"></p>
+        <p id="main__todays-service-charges"></p>
+        <p id="main__occupation-rate"></p>
+        <p id="rooms__most-booked"></p>
+        <p id="rooms__least-booked"></p>
+        <input type="date" id="orders__date-select">
+        <button id="orders__date-submit">Find Orders</button>
+        <table>
+          <h3>Food Orders Today</h3>
+          <thead>
+            <tr>
+              <th>Food</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody id="orders__todays-room-service">
+          </tbody>
+        </table>
+      </article>
+      <article id="tab__orders" class="tab-content">
+        <input type="date" id="customer__orders-date-select">
+        <button id="customer__orders-date-submit">Search Orders</button>
+        <table>
+          <h3 id="cutomer__orders-name">Food Orders</h3>
+          <thead>
+            <tr>
+              <th>Food</th>
+              <th>Cost</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="orders__customers-room-service">
+          </tbody>
+        </table>
+        <table>
+          <h3 id="cutomer__orders-name">Food Orders</h3>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Cost</th>
+              <th>Order</th>
+            </tr>
+          </thead>
+          <tbody id="room__service-menu">
+          </tbody>
+        </table>
+        <p id="customer__orders-total"></p>
+      </article>
+      <article id="tab__rooms" class="tab-content">
+          <table id="customer__booked-info">
+              <h3 id="customer__rooms-booked-Name">Reservations</h3>
+          <thead>
+            <tr>
+              <th>Room Number</th>
+              <th>Date Booked</th>
+            </tr>
+            </thead>
+            <tbody id="rooms__customer-booked-current">
+            </tbody>
+          </table>
+          <section class="booking-info">
+            <form id="booking-form">
+              <legend>Book A Room</legend>
+              <label><input type="radio" name="room-type" value="residential suite"> Residential Suite</label>
+              <label><input type="radio" name="room-type" value="junior suite"> Junior Suite</label>
+              <label><input type="radio" name="room-type" value="suite"> Basic Suite</label>
+              <label><input type="radio" name="room-type" value="single room"> Single Room</label>
+              <label>
+                Date To Book
+                <input type="date" id="room-book-date">
+              </label>
+              <button id="book-room" type="submit">Find Rooms</button>
+            </form>
+            <table id="booking-output">
+              <h3 id="customer__rooms-available">Rooms Available</h3>
+              <thead>
+                <tr>
+                  <th>Room Number</th>
+                  <th>Bed Size</th>
+                  <th>Number of Beds</th>
+                  <th>Bidet</th>
+                  <th>Cost Per Night</th>
+                </tr>
+              </thead>
+              <tbody id="rooms__book-room">
+              </tbody>
+            </table>
+          </section>
+        </article>
+      <article id="tab__customers" class="tab-content">
+        <input id="tab__customers-search" type="search" placeholder="Search Customers">
+        <ul class="tab__customers-output">
+          <li id="no-users">No Users Found</li>
+        </ul>
+      </article>
+    </main>
+  <script type="text/javascript" src="/overlook/main.bundle.js"></script></body>
+</html>
