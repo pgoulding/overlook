@@ -12,7 +12,7 @@ describe('Booking', function () {
   
   let booking;
   beforeEach(function () {
-    booking = new Booking(bookings, 7, '21/08/2019')
+    booking = new Booking(bookings, 7)
   })
 
   it('should be a function', function () {
@@ -26,8 +26,7 @@ describe('Booking', function () {
   it('should take in the bookings data, the userID for the info it\'s looking for, and a date', function () {
     expect(booking.data).to.be.equal(bookings)
     expect(booking.userID).to.be.equal(7)
-    expect(booking.date).to.be.equal('21/08/2019')
-  } ) 
+  }) 
 
   it('should return all bookings that a customer has made', function () {
     expect(booking.findBookings()).to.be.a('array')
