@@ -37,4 +37,9 @@ describe('UserRepo', function () {
     expect(userRepo.showUsers('Diedrick Featherbottoms')).to.equal('No Users Found, would you like to add one?')
   })
 
+  it('should be able to create a new user', function () {
+    expect(userRepo.createNewUser('Humphrey McSquiggletush')).to.eql({ id: 21, name: "Humphrey McSquiggletush"})
+    expect()
+  })
+
 });

@@ -1,49 +1,21 @@
 /* eslint-disable max-len */
-
-const data = {};
-
-fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/users/users')
-  .then(response => response.json())
-  .then(remote => data.users = remote.users)
-  .catch(err => console.error(err))
-
-fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/rooms/rooms')
-  .then(response => response.json())
-  .then(remote => data.rooms = remote.rooms)
-  .catch(err => console.error(err))
-
-fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/bookings/bookings')
-  .then(response => response.json())
-  .then(remote => data.bookings = remote.bookings)
-  .catch(err => console.error(err))
-
-fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1903/room-services/roomServices')
-  .then(response => response.json())
-  .then(remote => data.services = remote.roomServices)
-  .catch(err => console.error(err))
-
-
-// An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
-import './images/turing-logo.png'
+import './images/background-img.png'
 
 import Main from '../src/Main';
 import UserRepo from '../src/UserRepo'
 import Customer from './Customer';
-import RoomRepo from '../src/RoomRepo'
 import Room from '../src/Room';
 import RoomServiceRepo from './RoomServiceRepo';
 import RoomService from '../src/RoomService';
 import BookingRepo from './BookingsRepo';
 import Booking from './Booking'
 import domUpdates from './domUpdates';
+import data from './fetchData'
 
+$('.container').hide()
 
-
-// let roomRepo;
 $(document).ready(function () {
   let userRepo;
   let main; 
@@ -71,9 +43,11 @@ $(document).ready(function () {
     return thisDay;
   }
 
-  console.log(todaysDate())
-
   setTimeout(() => {
+    $('#welcome-screen').hide()
+    $('.container').fadeIn(700)
+    $('#booking-output').hide()
+    $('#customer__rooms-available').hide()
     main = new Main(data.bookings, data.services, data.rooms, todaysDate())
     userRepo = new UserRepo(data.users)
     orderRepo = new RoomServiceRepo(data.services, todaysDate)
@@ -82,14 +56,14 @@ $(document).ready(function () {
 
   $('ul.tabs li').click(function () {
     var tab_id = $(this).attr('data-tab');
-
     $('ul.tabs li').removeClass('current');
     $('.tab-content').removeClass('current');
-
     $(this).addClass('current');
     $("#" + tab_id).addClass('current');
   })
   
+  $('#customer__booked-info').hide()
+
   const reorder = dateSpec => {
     let splitDate = dateSpec.split('-')
     let year = splitDate[0]
@@ -107,13 +81,25 @@ $(document).ready(function () {
         let parsedID = parseInt(customerID)
         console.log(parsedID)
         user = new Customer(data.users, parsedID, undefined)
-        roomService = new RoomService(data.services, parsedID)
+        roomService = new RoomService(data.services, data.menu, parsedID)
         customerBooking = new Booking(data.bookings, parsedID)
         customerBooking.findBookings()
-
-        roomService.breakDown()
-        // roomService.perDate(todaysDate)
-        roomService.forAllDays()
+        roomService.updateInfo(todaysDate())
+        domUpdates.displayMenu(data.menu)
+        $('#room__service-menu button').click(function () {
+          let sammich = $(this).data('food')
+          roomService.orderFood(todaysDate(), sammich)
+          roomService.updateInfo(todaysDate())
+        })
+        $('#customer__booked-info').show()
+        
+        $('.cancel-booking').on('click', function () {
+          console.log('clicked')
+          let roomNum = $(this).data('room')
+          let dateSelect = $(this).data('date')
+          customerBooking.cancelBooking(roomNum, dateSelect, user.id)
+          $(this).closest('tr').remove()
+        })
 
       })
     } else {
@@ -121,37 +107,38 @@ $(document).ready(function () {
     }
   })
 
-
   $('#orders__date-submit').on('click', function () {
-    // console.log(reorder())
     let selectedDate = $('#orders__date-select').val()
-    orderRepo.totalServicesDate(reorder(selectedDate))
+    if (user) {
+      orderRepo.totalServicesDate(reorder(selectedDate))
+    } else {
+      alert('select a customer first')
+    }
   })
-  $('#book-room').on('click', function () {
-    let roomType = $('#booking-form input[type=radio][name=room-type]:checked').val()
-    let dateSelected = $('#room-book-date').val()
-    bookingRepo.findRoomsByType(roomType, data.rooms, reorder(dateSelected))
-    $('.book-this-room').on('click', function () {
-      let roomNum = $(this).data('room')
-      let dateSelect = $(this).data('date')
-      customerBooking.bookRoom(roomNum, dateSelect, user.id)
-      main.updateInfo(todaysDate())
-      bookingRepo.mostBookedDate()
-      bookingRepo.leastBookedDate()
-      $(this).closest('tr').remove()
-    })
+  $('#book-room').on('click', function (e) {
+    e.preventDefault()
+    if (user) {
+      let roomType = $('#booking-form input[type=radio][name=room-type]:checked').val()
+      let dateSelected = $('#room-book-date').val()
+      $('#booking-output').slideDown()
+      $('#customer__rooms-available').show()
+      bookingRepo.findRoomsByType(roomType, data.rooms, reorder(dateSelected))
+      $('.book-this-room').on('click', function () {
+        let roomNum = $(this).data('room')
+        let dateSelect = $(this).data('date')
+        customerBooking.bookRoom(roomNum, dateSelect, user.id)
+        $('.cancel-booking').on('click', function () {
+          console.log('clicked')
+          let roomNum = $(this).data('room')
+          let dateSelect = $(this).data('date')
+          customerBooking.cancelBooking(roomNum, dateSelect, user.id)
+          $(this).closest('tr').remove()
+        })
+        main.updateInfo(todaysDate())
+        bookingRepo.mostBookedDate()
+        bookingRepo.leastBookedDate()
+        $(this).closest('tr').remove()
+      })
+    }
   })
-
-
 })
-// const allUsers = new UserRepo(data.users)
-// const allRooms = new RoomRepo(data.rooms)
-// const allBookings = new BookingsRepo(data.bookings)
-// const allServices = new RoomServiceRepo(data.roomservice)
-
-// const showCustomerData = user => {
-//   const customer = new Customer(usersData, user)
-//   const room = new Room(roomsData, user)
-//   const roomService = new RoomService(roomServicesData, user)
-//   const booking = new Booking(bookingsData, user)
-// }

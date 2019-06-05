@@ -48,5 +48,10 @@ describe('Booking', function () {
 
   })
 
-  // it('should')
+  it('should be able to cancel their booking', function () {
+    let booking2 = new Booking([...bookings], 2)
+    expect(booking2.data).to.have.length(21)
+    expect(booking2.cancelBooking(2, '25/08/2019', 2)).to.be.an('array')
+    expect(booking2.data).to.have.length(20)
+  })
 })

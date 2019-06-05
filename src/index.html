@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <title>OverLook Hotel Systems</title>
   </head>
   <body>
-    <h1>Overlook</h1>
-    <div class="container">
+    <h2 id="welcome-screen">Welcome to Overlook Hotel Management Systems</h2>
+    <main class="container">
+        <h1>Overlook</h1>
       <ul class="tabs">
         <li class="tab-link current" data-tab="tab__main">Main</li>
         <li class="tab-link" data-tab="tab__orders" >Orders</li>
         <li class="tab-link" data-tab="tab__rooms">Rooms</li>
         <li class="tab-link" data-tab="tab__customers">Customers</li>
-        <li class="tab-link" id="customer__name-current" data-tab="tab__current-customer">No User Selected</li>
+        <p class="tab-link" id="customer__name-current">No User Selected</p>
       </ul>
-      <div id="tab__main" class="tab-content current">
+      <article id="tab__main" class="tab-content current">
         <p id="main__rooms-available"></p>
         <p id="main__todays-income"></p>
         <p id="main__todays-service-charges"></p>
@@ -33,10 +34,10 @@
           <tbody id="orders__todays-room-service">
           </tbody>
         </table>
-      </div>
-      <div id="tab__orders" class="tab-content">
+      </article>
+      <article id="tab__orders" class="tab-content">
         <input type="date" id="customer__orders-date-select">
-        <button id="customer__orders-date-submit"></button>
+        <button id="customer__orders-date-submit">Search Orders</button>
         <table>
           <h3 id="cutomer__orders-name">Food Orders</h3>
           <thead>
@@ -49,12 +50,23 @@
           <tbody id="orders__customers-room-service">
           </tbody>
         </table>
+        <table>
+          <h3 id="cutomer__orders-name">Food Orders</h3>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Cost</th>
+              <th>Order</th>
+            </tr>
+          </thead>
+          <tbody id="room__service-menu">
+          </tbody>
+        </table>
         <p id="customer__orders-total"></p>
-      </div>
-      <div id="tab__rooms" class="tab-content">
-        <div id="customer__booked-info">
-          <h3 id="customer__rooms-booked-Name">Rooms Available</h3>
-          <table>
+      </article>
+      <article id="tab__rooms" class="tab-content">
+          <table id="customer__booked-info">
+              <h3 id="customer__rooms-booked-Name">Reservations</h3>
           <thead>
             <tr>
               <th>Room Number</th>
@@ -64,39 +76,41 @@
             <tbody id="rooms__customer-booked-current">
             </tbody>
           </table>
-        </div>  
-        <h2>Book A Room</h2>
-        <form id="booking-form">
-          <input type="radio" name="room-type" value="residential suite">Residential Suite</input>
-          <input type="radio" name="room-type" value="junior suite">Junior Suite</input>
-          <input type="radio" name="room-type" value="suite">Basic Suite</input>
-          <input type="radio" name="room-type" value="single room">Single Room</input>
-          <input type="date" id="room-book-date">
-        </form>
-        <button id="book-room" type="submit">Book It!</button>
-        <table>
-          <h3 id="customer__rooms-available">Rooms Available</h3>
-          <thead>
-            <tr>
-              <th>Room Number</th>
-              <th>Bed Size</th>
-              <th>Number of Beds</th>
-              <th>Bidet</th>
-              <th>Cost Per Night</th>
-            </tr>
-          </thead>
-          <tbody id="rooms__book-room">
-          </tbody>
-        </table>
-      </div>
-      <div id="tab__customers" class="tab-content">
+          <section class="booking-info">
+            <form id="booking-form">
+              <legend>Book A Room</legend>
+              <label><input type="radio" name="room-type" value="residential suite"> Residential Suite</label>
+              <label><input type="radio" name="room-type" value="junior suite"> Junior Suite</label>
+              <label><input type="radio" name="room-type" value="suite"> Basic Suite</label>
+              <label><input type="radio" name="room-type" value="single room"> Single Room</label>
+              <label>
+                Date To Book
+                <input type="date" id="room-book-date">
+              </label>
+              <button id="book-room" type="submit">Find Rooms</button>
+            </form>
+            <table id="booking-output">
+              <h3 id="customer__rooms-available">Rooms Available</h3>
+              <thead>
+                <tr>
+                  <th>Room Number</th>
+                  <th>Bed Size</th>
+                  <th>Number of Beds</th>
+                  <th>Bidet</th>
+                  <th>Cost Per Night</th>
+                </tr>
+              </thead>
+              <tbody id="rooms__book-room">
+              </tbody>
+            </table>
+          </section>
+        </article>
+      <article id="tab__customers" class="tab-content">
         <input id="tab__customers-search" type="search" placeholder="Search Customers">
         <ul class="tab__customers-output">
           <li id="no-users">No Users Found</li>
         </ul>
-      </div>
-      <div id="tab__current-customer">
-      </div>
-    </div>
+      </article>
+    </main>
   </body>
 </html>
