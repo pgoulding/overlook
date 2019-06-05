@@ -57,3 +57,29 @@ ul.tabs li.current{
 #customer__name-current{
   float: right;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  legend{
+    font-weight:700;
+    font-size:1.25em;
+  }
+}
+
+table {
+  text-align: center;
+  th {
+    
+  }
+
+  tr:nth-child(2n){
+    background-color: $primary-background;
+    color:$primary-font-color;
+  }
+
+  td {
+
+  }
+
+}
