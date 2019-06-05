@@ -8,7 +8,7 @@ class Customer {
   }
 
   findName() {
-    let person = this.data.find(person => this.id === person.id).name
+    let person = this.data.find(person => this.id === person.id)
     domUpdates.displayUser(person)
     return person
   }

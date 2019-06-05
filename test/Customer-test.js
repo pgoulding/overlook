@@ -23,7 +23,7 @@ describe('Customer', function () {
   })
 
   it('should find the userName based on the userID', function () {
-    expect(customer.name).to.equal('Reginald Schaden')
+    expect(customer.name).to.eql({ id: 5, name: 'Reginald Schaden' })
   })
 
 });
